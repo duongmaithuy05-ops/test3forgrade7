@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General English Test - 50 Questions</title>
+    <!-- Nhập Font chữ Nghệ thuật & Sang trọng -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --theme-primary: #192a56; /* Royal Navy */
+            --theme-secondary: #273c75; 
+            --theme-accent: #e1b12c; /* Artistic Gold */
+            --theme-text: #2f3640;
+            --theme-bg: #f5f6fa;
+            --correct: #27ae60; 
+            --incorrect: #c23616; 
+            --bg-card: rgba(255, 255, 255, 0.95);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #dcdde1 0%, #f5f6fa 100%);
+            background-attachment: fixed; 
+            color: var(--theme-text);
+            min-height: 100vh; overflow-x: hidden; position: relative;
+            padding: 20px 10px 80px 10px; -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--theme-primary); }
+
+        .pattern {
+            position: fixed; z-index: -1; opacity: 0.5;
+            animation: float-soft 8s ease-in-out infinite;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        }
+        @keyframes float-soft {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-20px) rotate(5deg) scale(1.05); }
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 10; }
+
+        .card {
+            background: var(--bg-card); 
+            border-radius: 16px; padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05); 
+            margin-bottom: 30px; 
+            border: 1px solid rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        #start-screen { text-align: center; margin-top: 10vh; border-top: 5px solid var(--theme-accent); }
+        #start-screen h1 { font-size: 45px; letter-spacing: 1px; margin-bottom: 10px; color: var(--theme-primary);}
+        
+        input[type="text"].name-input {
+            padding: 16px 20px; font-size: 18px; border-radius: 8px;
+            border: 2px solid #dcdde1; width: 80%; max-width: 400px;
+            margin: 25px 0; outline: none; font-weight: 600; color: var(--theme-primary);
+            background-color: transparent; transition: all 0.3s; text-align: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+        input[type="text"].name-input:focus { border-color: var(--theme-accent); box-shadow: 0 5px 15px rgba(225, 177, 44, 0.2); }
+        
+        .btn {
+            background: linear-gradient(135deg, #fbc531 0%, #e1b12c 100%);
+            color: #192a56; border: none; padding: 16px 45px;
+            font-size: 20px; font-weight: 700; border-radius: 30px; cursor: pointer;
+            box-shadow: 0 8px 20px rgba(225, 177, 44, 0.4); transition: all 0.2s; display: inline-block;
+            font-family: 'Montserrat', sans-serif; letter-spacing: 1px; text-transform: uppercase;
+        }
+        .btn:active { transform: translateY(4px); box-shadow: 0 4px 10px rgba(225, 177, 44, 0.4); }
+        .btn:hover { transform: scale(1.03); filter: brightness(1.1); }
+
+        #top-bar { display: flex; justify-content: space-between; align-items: center; position: sticky; top: 15px; z-index: 100; border-left: 5px solid var(--theme-accent); padding: 15px 30px; }
+        #timer {
+            background: var(--theme-primary); color: #fff; padding: 10px 25px;
+            border-radius: 30px; font-size: 22px; font-weight: 700; box-shadow: 0 5px 15px rgba(25, 42, 86, 0.3);
+            font-family: 'Montserrat', sans-serif; letter-spacing: 1px;
+        }
+        .timer-warning { background: var(--incorrect) !important; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0.7; } }
+
+        #highlight-btn {
+            background: #ffffff; color: var(--theme-primary); border: 2px solid var(--theme-primary);
+            padding: 10px 20px; border-radius: 30px; font-weight: 600; cursor: pointer;
+            transition: 0.2s; font-family: 'Montserrat', sans-serif;
+        }
+        #highlight-btn:active { transform: translateY(2px); }
+        .highlighted { background-color: rgba(225, 177, 44, 0.4); border-radius: 3px; padding: 0 2px;}
+
+        .section-title { font-size: 26px; margin: 35px 0 20px; border-bottom: 2px solid #dcdde1; padding-bottom: 12px; color: var(--theme-primary);}
+        .passage-box { background: #fdfdfd; padding: 25px; border-radius: 12px; border-left: 4px solid var(--theme-accent); margin-bottom: 25px; font-size: 16px; line-height: 1.8; color: #353b48; box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
+
+        .split-container { display: flex; gap: 25px; margin-bottom: 30px; height: 750px; }
+        .split-left, .split-right { flex: 1; background: var(--bg-card); border-radius: 16px; padding: 30px; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); overflow-y: auto; }
+        .split-left::-webkit-scrollbar, .split-right::-webkit-scrollbar { width: 6px; }
+        .split-left::-webkit-scrollbar-thumb, .split-right::-webkit-scrollbar-thumb { background: #dcdde1; border-radius: 10px; }
+
+        @media (max-width: 900px) {
+            .split-container { flex-direction: column; height: auto; }
+            .split-left, .split-right { overflow-y: visible; }
+        }
+
+        .question-block { margin-bottom: 35px; padding-bottom: 25px; border-bottom: 1px solid #f5f6fa; }
+        .question-text { font-size: 17px; font-weight: 600; margin-bottom: 18px; line-height: 1.6; color: var(--theme-primary); }
+        
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 15px; }
+        .option {
+            background: #ffffff; border: 1px solid #dcdde1; border-radius: 8px; padding: 14px 18px;
+            font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--theme-text);
+        }
+        .option:hover:not(.disabled) { transform: translateX(8px); border-color: var(--theme-accent); background: #fafbfc;}
+        
+        .option.selected-opt { border-color: var(--theme-primary); background-color: #f5f6fa; color: var(--theme-primary); font-weight: 600; }
+        .option.correct { background: #eafaf1 !important; color: var(--correct) !important; border-color: var(--correct) !important; font-weight: 700;}
+        .option.incorrect { background: #fdedec !important; color: var(--incorrect) !important; border-color: var(--incorrect) !important; font-weight: 700;}
+        .option.disabled { cursor: not-allowed; opacity: 0.8; }
+        
+        .input-gap { border: 1px solid #dcdde1; border-radius: 8px; padding: 14px 18px; font-size: 16px; outline: none; font-weight: 600; width: 100%; color: var(--theme-primary); background: #ffffff; margin-bottom: 10px; transition: 0.3s; font-family: 'Montserrat', sans-serif;}
+        .input-gap:focus { border-color: var(--theme-accent); box-shadow: 0 0 10px rgba(225, 177, 44, 0.1);}
+
+        .check-btn {
+            background: transparent; color: var(--theme-primary); border: 2px solid var(--theme-primary); padding: 8px 24px;
+            border-radius: 20px; font-weight: 700; font-size: 14px; cursor: pointer;
+            transition: all 0.2s; margin-top: 5px; font-family: 'Montserrat', sans-serif;
+        }
+        .check-btn:hover { background: var(--theme-primary); color: #fff; }
+        .check-btn:active { transform: scale(0.95); }
+        .check-btn.disabled { border-color: #dcdde1; color: #a4b0be; cursor: not-allowed; display: none; } 
+
+        .explanation {
+            display: none; background: #fff; border-left: 4px solid var(--theme-accent);
+            padding: 18px; margin-top: 18px; border-radius: 0 8px 8px 0; font-size: 15px; line-height: 1.7; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        #report-screen { display: none; border-top: 5px solid var(--theme-primary); }
+        .score-board { text-align: center; margin: 30px 0; background: #fdfdfd; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #f5f6fa;}
+        
+        .matrix-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 30px; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 1px solid #dcdde1;}
+        .matrix-table th { background: #f5f6fa; color: var(--theme-primary); padding: 18px; font-size: 16px; text-align: center; font-family: 'Playfair Display', serif; text-transform: uppercase; letter-spacing: 1px;}
+        .matrix-table td { padding: 18px; border-top: 1px solid #f5f6fa; font-weight: 500; font-size: 15px; text-align: center; color: var(--theme-text);}
+        
+        .badge { padding: 6px 14px; border-radius: 20px; color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 0.5px;}
+        .mastered { background: var(--correct); }
+        .practice { background: var(--theme-accent); color: #192a56; }
+        .weakness { background: var(--incorrect); }
+
+        .teacher-comment { margin-top: 35px; background: #fafbfc; border-left: 5px solid var(--theme-primary); padding: 30px; border-radius: 0 12px 12px 0; text-align: left; box-shadow: 0 5px 15px rgba(0,0,0,0.02);}
+        .teacher-comment h3 { color: var(--theme-primary); margin-bottom: 12px; font-size: 22px; }
+
+        #confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
+        
+        /* CSS cho Biển báo */
+        .sign-wet-floor { background:#f1c40f; color:#000; padding:15px; border:3px solid #000; border-radius:8px; text-align:center; font-weight:900; width: 160px; margin: 15px auto; box-shadow: 0 5px 10px rgba(0,0,0,0.1); font-family: sans-serif;}
+        .sign-no-parking { position:relative; width:120px; height:120px; margin: 15px auto 5px auto; background:#fff; border:10px solid #c0392b; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+        .sign-no-mobile { position:relative; width:120px; height:120px; margin: 15px auto; background:#fff; border:10px solid #c0392b; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+        .slash-line { position:absolute; width:130%; height:10px; background:#c0392b; transform:rotate(-45deg); z-index:2; }
+    </style>
+</head>
+<body>
+    <div style="font-size:65px; position:fixed; top:12%; left:3%;" class="pattern">🎨</div>
+    <div style="font-size:55px; position:fixed; top:45%; right:5%; animation-delay: 1.5s;" class="pattern">🎻</div>
+    <div style="font-size:50px; position:fixed; bottom:10%; left:5%; animation-delay: 2.5s;" class="pattern">🎭</div>
+    <div style="font-size:70px; position:fixed; top:75%; right:12%; animation-delay: 0.8s;" class="pattern">🖼️</div>
+
+    <canvas id="confetti"></canvas>
+
+    <div class="container" id="app-container">
+        
+        <div id="start-screen" class="card">
+            <h1>GENERAL ENGLISH TEST</h1>
+            <h3 style="color: var(--theme-secondary); font-size: 18px; margin-top: 15px; margin-bottom: 25px; font-family: 'Montserrat', sans-serif;">Teacher: Ms Mai Thuy | Time: 60 minutes | Total: 50 Questions</h3>
+            <input type="text" id="student-name" class="name-input" placeholder="Enter your full name here..." autocomplete="off"><br>
+            <button class="btn" onclick="startTest()">START TEST</button>
+        </div>
+
+        <div id="quiz-screen" style="display: none;">
+            <div id="top-bar" class="card">
+                <div style="font-weight: 700; font-size: 16px; color: var(--theme-primary); text-transform: uppercase;">Student: <span id="display-name" style="color: var(--theme-accent);"></span></div>
+                <button id="highlight-btn" onclick="toggleHighlight()">🖍️ Highlight Tool</button>
+                <div id="timer">60:00</div>
+            </div>
+
+            <div class="card">
+                <h2 class="section-title">I. PHONETICS & STRESS (5 Questions)</h2>
+                <div id="part1-container"></div>
+                
+                <h2 class="section-title">II. VOCABULARY, GRAMMAR & COMMUNICATION (13 Questions)</h2>
+                <div id="part2-container"></div>
+
+                <h2 class="section-title">III. CLOZE TEST (5 Questions)</h2>
+                <div class="passage-box">
+                    Dong Ho Painting is a kind of Vietnamese folk painting originating in Dong Ho Village, Bac Ninh Province. Dong Ho paintings have about 300 years of history in the <b>(19) _______</b> of Vietnam. Colours of the painting are refined from various kinds of tree <b>(20) _______</b>, which people can easily find in Vietnam. Traditional <b>(21) _______</b> use all-natural colours for their pictures. The painting is covered by a <b>(22) _______</b> of sticky rice paste to protect the painting and their colours. They are so <b>(23) _______</b> lasting, so that it is very difficult to make them dimmer even time or daylight.
+                </div>
+                <div id="part3-container"></div>
+
+                <h2 class="section-title">IV. READING - SHORT PASSAGE (5 Questions)</h2>
+                <div class="passage-box">
+                    Artists use colour to create patterns. Colour can also show different moods. Bright colours make us feel happy and energetic. Dark colours make us feel calm or sad. The primary colours are red, yellow, and blue. They are the colours that can be mixed together to make different colours. Mixing two primary colours makes a secondary colour. The secondary colours are orange, green, and violet. Orange is made by mixing yellow and red. Intermediate colours can be made by mixing two primary colours and a secondary colour together. Some intermediate colours are blue violet and red orange. Black, white, and gray are special colours. They are called neutral colours. Colours have been organized into a colour wheel.
+                </div>
+                <div id="part4-container"></div>
+            </div>
+
+            <h2 class="section-title" style="background:var(--bg-card); padding:20px; border-radius:12px; text-align:center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02); border-left: 4px solid var(--theme-primary);">V. READING - LONG PASSAGES (10 Questions)</h2>
+            <div class="split-container">
+                <div class="split-left">
+                    <h3 style="margin-bottom:15px; color:var(--theme-secondary);">Passage 1 (Questions 29-33)</h3>
+                    <div class="passage-box">
+                        Vietnamese food culture varies by regions from the north to the south. In Northern Vietnam, food is characterized by light and balanced. Northern Vietnam is seen to be the cradle of Vietnamese cuisine with many notable dishes like Pho, Bun Rieu, Bun Thang, Bun Cha, Banh Cuon, etc. The regional cuisine of Central Vietnam is famous for its spicy food. Hue cuisine is typical Central Vietnam’s food culture. Food in the region is often used with chili peppers and shrimp sauces, namely, Bun Bo Hue, Banh Khoai, Banh Beo, etc. In Southern Vietnam, the warm weather and fertile soil create an ideal condition for planting a variety of fruit, vegetables and livestock. Thus, food in the region is often added with garlic, shallots and fresh herbs. Particularly, Southerners are favored of sugar; they add sugar in almost dishes.
+                    </div>
+
+                    <h3 style="margin-top:30px; margin-bottom:15px; color:var(--theme-secondary);">Passage 2 (Questions 34-38)</h3>
+                    <div class="passage-box">
+                        Vietnamese water puppetry is a unique folk art. It's said that 'Not watching a performance of water puppetry means not visiting Vietnam yet.' That's why water puppetry is a must-see show for tourists in Vietnam. Watching this show can help you escape from your busy life and refresh your minds with unforgettable moments. During the shows, you can only see the puppets and a small folk orchestra of about 7 people; the puppeteers stand behind a curtained backdrop in a pool. All puppets are made of fig wood which goes along well with water. Then they are carved and painted. The themes of the shows are very familiar to Vietnamese people. They focus on the daily life of farmers and common aspects of Vietnamese spiritual life. Thang Long Water Puppet Theatre on Dinh Tien Hoang Street near Hoan Kiem Lake is the most popular theatre for water puppetry.
+                    </div>
+                </div>
+                <div class="split-right">
+                    <h4 style="font-family: 'Playfair Display', serif; color:var(--theme-primary); margin-bottom:15px; font-size: 20px;">QUESTIONS</h4>
+                    <div id="part5-container"></div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 25px;">
+                <h2 class="section-title">VI. WRITING (12 Questions)</h2>
+                <div id="part6-container"></div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px; margin-bottom: 60px;">
+                <button class="btn" id="submit-btn" style="padding: 20px 80px; font-size: 24px;" onclick="submitTest()">SUBMIT TEST 🏆</button>
+            </div>
+        </div>
+
+        <div id="report-screen" class="card">
+            <h1 style="text-align: center; font-size: 40px; margin-bottom: 10px;">🎉 KẾT QUẢ BÀI THI 🎉</h1>
+            <div class="score-board">
+                <span id="final-name" style="color: var(--theme-primary); font-family: 'Playfair Display', serif; font-weight: 900; font-size: 32px;"></span><br>
+                <div style="color: var(--theme-text); font-size: 18px; font-weight: 500; margin-top: 15px; letter-spacing: 1px; text-transform: uppercase;">Tổng điểm:</div>
+                <div id="final-score-10" style="font-family: 'Playfair Display', serif; font-size: 85px; color: var(--theme-accent); font-weight: 900; margin-top: 5px; text-shadow: 2px 2px 0px rgba(0,0,0,0.1);"></div>
+            </div>
+
+            <h2 style="color: var(--theme-primary); margin-top: 40px; font-size: 28px;">📊 MA TRẬN KỸ NĂNG (KNOWLEDGE MATRIX)</h2>
+            <table class="matrix-table" id="matrix-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;">Kỹ năng / Mảng kiến thức</th>
+                        <th>Điểm</th>
+                        <th>Tỷ lệ %</th>
+                        <th>Xếp loại năng lực</th>
+                    </tr>
+                </thead>
+                <tbody id="matrix-body">
+                </tbody>
+            </table>
+
+            <div class="teacher-comment" id="teacher-comment">
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-weight:600; color: var(--theme-secondary); font-size: 16px;">Con hãy cuộn lên trên để xem lại các câu báo đỏ và đọc kỹ lời giải chi tiết nhé!</p>
+            </div>
+        </div>
+    </div>
+
+<script>
+const quizData = [
+    // PART I: Phonetics & Stress (1-5)
+    { id: 1, cat: "phonetics", type: "mcq", q: "1. Choose the word whose underlined part is pronounced differently:", opts: ["A. lei<u>s</u>ure", "B. man<u>s</u>ion", "C. vi<u>s</u>ion", "D. plea<u>s</u>ure"], correct: 1,
+      exp: { trans: "Dịch: Chọn từ có phần gạch chân phát âm khác biệt.", opts: "A. leisure /ˈleʒ.ər/ - B. mansion /ˈmæn.ʃən/ - C. vision /ˈvɪʒ.ən/ - D. pleasure /ˈpleʒ.ər/", whyCorrect: "Chữ 's' trong từ 'mansion' được phát âm là /ʃ/ (sờ nặng).", whyIncorrect: "Các từ còn lại đều được phát âm là /ʒ/ (sờ nhẹ rung thanh quản)." } },
+    { id: 2, cat: "phonetics", type: "mcq", q: "2. Choose the word whose underlined part is pronounced differently:", opts: ["A. p<u>o</u>rt", "B. sh<u>o</u>rt", "C. cl<u>o</u>ck", "D. <u>o</u>rphan"], correct: 2,
+      exp: { trans: "Dịch: Chọn từ có phần gạch chân phát âm khác biệt.", opts: "A. port /pɔːt/ - B. short /ʃɔːt/ - C. clock /klɒk/ - D. orphan /ˈɔː.fən/", whyCorrect: "Chữ 'o' trong từ 'clock' phát âm là âm o ngắn /ɒ/.", whyIncorrect: "Các từ còn lại đều chứa âm o dài /ɔː/." } },
+    { id: 3, cat: "phonetics", type: "mcq", q: "3. Choose the word whose underlined part is pronounced differently:", opts: ["A. <u>s</u>unburn", "B. <u>s</u>culpture", "C. <u>s</u>ervice", "D. <u>s</u>ugar"], correct: 3,
+      exp: { trans: "Dịch: Chọn từ có phần gạch chân phát âm khác biệt.", opts: "A. sunburn /ˈsʌn.bɜːn/ - B. sculpture /ˈskʌlp.tʃər/ - C. service /ˈsɜː.vɪs/ - D. sugar /ˈʃʊɡ.ər/", whyCorrect: "Chữ 's' trong từ 'sugar' phát âm là /ʃ/ (âm sờ nặng).", whyIncorrect: "Các từ còn lại đều phát âm là /s/ (âm sờ nhẹ)." } },
+    { id: 4, cat: "phonetics", type: "mcq", q: "4. Choose the word with a different stress pattern:", opts: ["A. national", "B. festival", "C. saxophone", "D. violin"], correct: 3,
+      exp: { trans: "Dịch: Chọn từ có trọng âm rơi vào vị trí khác biệt.", opts: "A. NAtional - B. FEStival - C. SAXophone - D. vioLIN", whyCorrect: "Từ 'violin' có trọng âm rơi vào âm tiết thứ 3 (/ˌvaɪəˈlɪn/).", whyIncorrect: "Các từ còn lại đều là từ 3 âm tiết có trọng âm rơi vào âm tiết thứ nhất." } },
+    { id: 5, cat: "phonetics", type: "mcq", q: "5. Choose the word with a different stress pattern:", opts: ["A. delicious", "B. onion", "C. recipe", "D. pepper"], correct: 0,
+      exp: { trans: "Dịch: Chọn từ có trọng âm rơi vào vị trí khác biệt.", opts: "A. deLIcious - B. ONion - C. REcipe - D. PEPper", whyCorrect: "Từ 'delicious' có trọng âm rơi vào âm tiết thứ 2 (/dɪˈlɪʃəs/). Đuôi -ious làm trọng âm rơi vào âm ngay trước nó.", whyIncorrect: "Các từ còn lại đều có trọng âm rơi vào âm tiết thứ nhất." } },
+
+    // PART II: Vocab & Grammar (6-18)
+    { id: 6, cat: "vocab_gram", type: "mcq", q: "6. 'Tien Quan Ca' is Vietnam's national _______.", opts: ["A. festival", "B. anthem", "C. song", "D. performance"], correct: 1,
+      exp: { trans: "Dịch: 'Tiến Quân Ca' là _______ quốc gia của Việt Nam.", opts: "A. lễ hội - B. quốc ca - C. bài hát - D. buổi biểu diễn", whyCorrect: "Ta có cụm từ cố định (collocation) 'National anthem' mang nghĩa là 'Quốc ca'.", whyIncorrect: "Dùng 'national song' là sai thuật ngữ. Lễ hội hay buổi biểu diễn không phù hợp." } },
+    { id: 7, cat: "vocab_gram", type: "mcq", q: "7. Her habits seemed so _______ mine.", opts: ["A. different with", "B. different from", "C. different like", "D. different as"], correct: 1,
+      exp: { trans: "Dịch: Thói quen của cô ấy dường như quá khác biệt so với thói quen của tôi.", opts: "A, B, C, D là các giới từ đi kèm với 'different'.", whyCorrect: "Cấu trúc so sánh sự khác biệt chuẩn xác nhất là: 'different from' (khác biệt với).", whyIncorrect: "Trong tiếng Anh chuẩn, không dùng 'different with/like/as'. Dùng sai giới từ là lỗi rất phổ biến." } },
+    { id: 8, cat: "vocab_gram", type: "mcq", q: "8. Classical music is not as _______ as pop music.", opts: ["A. exciting", "B. boring", "C. quiet", "D. slow"], correct: 0,
+      exp: { trans: "Dịch: Nhạc cổ điển thì không _______ bằng nhạc pop.", opts: "A. sôi động - B. nhàm chán - C. yên tĩnh - D. chậm chạp", whyCorrect: "Dựa vào ngữ nghĩa thực tế, nhạc cổ điển được đánh giá là không 'sôi động' (exciting) bằng nhạc pop. Cấu trúc so sánh bằng: not as + adj + as.", whyIncorrect: "Nếu chọn boring/quiet/slow thì câu sẽ mang nghĩa ngược logic thực tế." } },
+    { id: 9, cat: "vocab_gram", type: "mcq", q: "9. The water puppet show was interesting. The _______ were so lovely.", opts: ["A. puppets", "B. composers", "C. painters", "D. musicians"], correct: 0,
+      exp: { trans: "Dịch: Buổi múa rối nước rất thú vị. Những _______ thì rất đáng yêu.", opts: "A. con rối - B. nhà soạn nhạc - C. họa sĩ - D. nhạc sĩ", whyCorrect: "Ngữ cảnh 'Water puppet show' (múa rối nước) thì chủ thể biểu diễn xuất hiện là những 'con rối' (puppets).", whyIncorrect: "B, C, D đều chỉ con người (nhạc sĩ, họa sĩ), không hợp với tính từ 'lovely' dùng cho đạo cụ biểu diễn." } },
+    { id: 10, cat: "vocab_gram", type: "mcq", q: "10. The gallery is _______ it was 10 years ago. There is no change at all.", opts: ["A. different from", "B. different as", "C. same as", "D. the same as"], correct: 3,
+      exp: { trans: "Dịch: Phòng tranh _______ cách đây 10 năm. Chẳng có sự thay đổi nào cả.", opts: "A. khác với - B. sai ngữ pháp - C. thiếu mạo từ 'the' - D. giống hệt như", whyCorrect: "Dựa vào vế sau 'There is no change at all' (không thay đổi) -> Phòng tranh 'giống như' ngày xưa. Cấu trúc là 'the same as'.", whyIncorrect: "Đáp án A ngược nghĩa. Đáp án C bị thiếu mạo từ 'the' bắt buộc." } },
+    { id: 11, cat: "vocab_gram", type: "mcq", q: "11. _______ water should I put into the glass?", opts: ["A. How", "B. How much", "C. How many", "D. What"], correct: 1,
+      exp: { trans: "Dịch: Tôi nên rót _______ nước vào cốc?", opts: "A. Thế nào - B. Bao nhiêu (không đếm được) - C. Bao nhiêu (đếm được) - D. Cái gì", whyCorrect: "'Water' (nước) là danh từ KHÔNG đếm được nên bắt buộc dùng 'How much' để hỏi số lượng.", whyIncorrect: "Chỉ dùng 'How many' khi phía sau là danh từ đếm được số nhiều (vd: apples, books)." } },
+    { id: 12, cat: "vocab_gram", type: "mcq", q: "12. I’m very busy, I have _______ things to do today.", opts: ["A. any", "B. lots of", "C. much", "D. a little"], correct: 1,
+      exp: { trans: "Dịch: Tôi rất bận, hôm nay tôi có _______ việc phải làm.", opts: "A. bất kỳ - B. rất nhiều - C. nhiều (không đếm được) - D. một chút", whyCorrect: "Đây là câu khẳng định, chữ 'things' (nhiều thứ/việc) là danh từ đếm được số nhiều nên dùng 'lots of' là chính xác.", whyIncorrect: "'much' và 'a little' chỉ đi với danh từ không đếm được. 'any' chỉ dùng trong câu phủ định/nghi vấn." } },
+    { id: 13, cat: "vocab_gram", type: "mcq", q: "13. There is _______ tofu, but there aren’t _______ sandwiches.", opts: ["A. some - some", "B. any - any", "C. some - any", "D. any - some"], correct: 2,
+      exp: { trans: "Dịch: Có _______ đậu phụ, nhưng lại không có _______ chiếc bánh mì kẹp nào.", opts: "Phân biệt Some và Any", whyCorrect: "Vế đầu là câu khẳng định -> dùng 'some' (There is some tofu). Vế sau là câu phủ định có 'aren't' -> bắt buộc dùng 'any'.", whyIncorrect: "Quy tắc: 'some' dùng cho câu khẳng định, 'any' dùng cho câu phủ định và nghi vấn." } },
+    { id: 14, cat: "vocab_gram", type: "mcq", q: `14. What does this sign mean?<br>
+        <div class="sign-wet-floor">
+            <span style="font-size:40px; display:block; margin-bottom:5px;">⚠️</span>CAUTION<br>WET FLOOR
+        </div>`, opts: ["A. You should walk carefully because the floor is wet.", "B. You are allowed to wash your feet here.", "C. You must not walk on this floor under any circumstances.", "D. You have to clean the floor right now."], correct: 0,
+      exp: { trans: "Dịch: Biển báo này có nghĩa là gì? (Chú ý: Sàn ướt)", opts: "A. Bạn nên đi lại cẩn thận vì sàn ướt - B. Bạn được phép rửa chân ở đây - C. Tuyệt đối không được đi trên sàn - D. Bạn phải lau sàn ngay lập tức", whyCorrect: "Biển 'Caution: Wet floor' nhằm cảnh báo nguy hiểm trơn trượt, khuyên người qua lại nên bước đi cẩn thận (walk carefully).", whyIncorrect: "Biển mang tính cảnh báo nguy hiểm, không cấm tuyệt đối (C) hay bắt ép lau dọn (D). Rửa chân (B) hoàn toàn sai ngữ cảnh." } },
+    { id: 15, cat: "vocab_gram", type: "mcq", q: `15. What does this sign tell us?<br>
+        <div class="sign-no-parking">
+            <span style="font-size:50px; font-weight:900; color:#333; z-index:1;">P</span>
+            <div class="slash-line"></div>
+        </div>
+        <div style="text-align:center; font-family:'Montserrat'; font-weight:bold; color:#c0392b; margin-top:2px;">IN FRONT OF THE GATES</div>`, opts: ["A. You can park your car near the gates if you want.", "B. You must not leave your vehicle in front of the gates.", "C. The gates are closed so you have to park here.", "D. You should open the gates to park your car inside."], correct: 1,
+      exp: { trans: "Dịch: Biển báo này nói cho chúng ta điều gì? (Cấm đỗ xe trước cổng)", opts: "A. Bạn có thể đỗ xe gần cổng - B. Bạn không được để xe trước cổng - C. Cổng đóng nên phải đỗ ở đây - D. Bạn nên mở cổng để đỗ xe bên trong", whyCorrect: "Biển chữ P bị gạch chéo có nghĩa là CẤM ĐỖ XE. Lời chỉ dẫn ghi rõ 'Không để xe trước cổng' (must not leave your vehicle in front of the gates).", whyIncorrect: "Must not (cấm đoán) hoàn toàn trái ngược với 'can' (có thể), 'have to' (phải) hay 'should' (nên)." } },
+    { id: 16, cat: "vocab_gram", type: "mcq", q: `16. What does this sign mean?<br>
+        <div class="sign-no-mobile">
+            <span style="font-size:50px; z-index:1;">📱</span>
+            <div class="slash-line"></div>
+        </div>`, opts: ["A. You can buy mobile phones here.", "B. You must turn on your mobile phone.", "C. You are not allowed to use your mobile phone here.", "D. You should charge your mobile phone here."], correct: 2,
+      exp: { trans: "Dịch: Biển báo này có nghĩa là gì?", opts: "A. Bạn có thể mua điện thoại - B. Bạn phải bật điện thoại lên - C. Bạn không được phép sử dụng điện thoại ở đây - D. Bạn nên sạc điện thoại ở đây", whyCorrect: "Biển báo vòng tròn viền đỏ có gạch chéo chèn lên hình điện thoại là biển báo CẤM sử dụng điện thoại (not allowed to use).", whyIncorrect: "Mua, bật, hay sạc điện thoại đều sai ý nghĩa của một biển cấm." } },
+    { id: 17, cat: "vocab_gram", type: "mcq", q: `17. Tom: "Why don't we go to the cinema this Saturday?"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mary: "______"`, opts: ["A. That's a good idea!", "B. You're welcome.", "C. Yes, I do.", "D. It's very kind of you to say so."], correct: 0,
+      exp: { trans: "Dịch: Tom: 'Tại sao chúng ta không đi xem phim vào thứ Bảy này nhỉ?' - Mary: '______'", opts: "A. Đó là một ý kiến hay! - B. Không có chi - C. Vâng, tôi làm - D. Bạn thật tốt khi nói vậy", whyCorrect: "Cấu trúc 'Why don't we + V?' dùng để đưa ra lời rủ rê/đề nghị. Lời đáp phù hợp nhất thể hiện sự đồng tình là 'That's a good idea!'.", whyIncorrect: "'You're welcome' dùng đáp lại lời cảm ơn. C sai ngữ pháp. D dùng để đáp lại một lời khen." } },
+    { id: 18, cat: "vocab_gram", type: "mcq", q: `18. Anna: "I think our new English teacher is very dedicated."<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;John: "______. She always helps us with our homework after class."`, opts: ["A. I don't quite agree", "B. I completely agree with you", "C. You must be kidding", "D. It doesn't matter."], correct: 1,
+      exp: { trans: "Dịch: Anna: 'Mình nghĩ giáo viên Tiếng Anh mới rất tận tâm.' - John: '______. Cô ấy luôn giúp chúng ta làm bài sau giờ học.'", opts: "A. Mình không hoàn toàn đồng ý - B. Mình hoàn toàn đồng ý với bạn - C. Bạn hẳn đang đùa - D. Không thành vấn đề", whyCorrect: "Vế sau John đưa ra minh chứng khen ngợi cô giáo -> thể hiện sự ĐỒNG TÌNH tuyệt đối với Anna. Đáp án 'I completely agree with you' là chính xác.", whyIncorrect: "A và C thể hiện sự phản đối/hoài nghi. D dùng khi muốn xoa dịu lời xin lỗi." } },
+
+    // PART III: Cloze Test (19-23)
+    { id: 19, cat: "cloze", type: "mcq", q: "19. Dong Ho paintings have about 300 years of history in the _______ of Vietnam.", opts: ["A. north", "B. south", "C. east", "D. west"], correct: 0,
+      exp: { trans: "Dịch: Tranh Đông Hồ có lịch sử khoảng 300 năm ở miền _______ Việt Nam.", opts: "A. Bắc - B. Nam - C. Đông - D. Tây", whyCorrect: "Câu trước đó nhắc đến 'Dong Ho Village, Bac Ninh Province' (Tỉnh Bắc Ninh). Tỉnh Bắc Ninh nằm ở miền Bắc (North) Việt Nam.", whyIncorrect: "Các hướng Nam, Đông, Tây đều sai thực tế địa lý." } },
+    { id: 20, cat: "cloze", type: "mcq", q: "20. Colours of the painting are refined from various kinds of tree _______.", opts: ["A. leaves", "B. roots", "C. branches", "D. trunks"], correct: 0,
+      exp: { trans: "Dịch: Màu sắc của tranh được tinh chế từ nhiều loại _______ cây khác nhau.", opts: "A. lá - B. rễ - C. cành - D. thân", whyCorrect: "Trong văn hóa tranh Đông Hồ, màu sắc tự nhiên thường được chiết xuất từ lá cây (leaves) - ví dụ màu xanh từ lá tràm. 'Tree leaves' là cụm từ hợp lý.", whyIncorrect: "Rễ, cành hay thân cây ít được nhắc đến làm nguyên liệu chính tạo màu sắc rực rỡ như lá cây." } },
+    { id: 21, cat: "cloze", type: "mcq", q: "21. Traditional _______ use all-natural colours for their pictures.", opts: ["A. artists", "B. actors", "C. musicians", "D. singers"], correct: 0,
+      exp: { trans: "Dịch: Các _______ truyền thống sử dụng hoàn toàn màu tự nhiên cho bức tranh của họ.", opts: "A. họa sĩ/nghệ sĩ - B. diễn viên - C. nhạc sĩ - D. ca sĩ", whyCorrect: "Chủ thể tạo ra 'pictures' (bức tranh) chắc chắn phải là các nghệ nhân, họa sĩ (artists).", whyIncorrect: "Diễn viên, nhạc sĩ, ca sĩ không làm công việc vẽ tranh." } },
+    { id: 22, cat: "cloze", type: "mcq", q: "22. The painting is covered by a _______ of sticky rice paste to protect the painting...", opts: ["A. layer", "B. piece", "C. sheet", "D. bowl"], correct: 0,
+      exp: { trans: "Dịch: Bức tranh được bao phủ bởi một _______ hồ nếp để bảo vệ tranh...", opts: "A. lớp - B. mẩu/miếng - C. tờ - D. cái bát", whyCorrect: "Để bảo vệ mặt tranh, người ta phải quét một 'lớp' (a layer) hồ nếp (sticky rice paste) lên trên.", whyIncorrect: "Không ai đắp một miếng, một tờ hay úp cả một bát hồ nếp lên bức tranh cả." } },
+    { id: 23, cat: "cloze", type: "mcq", q: "23. They are so _______ lasting, so that it is very difficult to make them dimmer...", opts: ["A. long", "B. short", "C. far", "D. near"], correct: 0,
+      exp: { trans: "Dịch: Chúng thì _______ bền màu, vì vậy rất khó để làm mờ chúng...", opts: "A. lâu/dài - B. ngắn - C. xa - D. gần", whyCorrect: "Ta có tính từ ghép 'long-lasting' mang nghĩa là bền bỉ, lâu phai. Nghĩa này giải thích hoàn hảo cho vế sau: 'khó làm chúng mờ đi'.", whyIncorrect: "Nếu chọn 'short' (nhanh phai) thì mâu thuẫn hoàn toàn với vế khó làm mờ phía sau." } },
+
+    // PART IV: Read Short (24-28)
+    { id: 24, cat: "read_short", type: "mcq", q: "24. What is the passage mainly about?", opts: ["A. Primary colours, secondary colours and intermediate colours", "B. The ways to mix colours", "C. Colour and its effects on our mood", "D. Some basic information about colour"], correct: 3,
+      exp: { trans: "Dịch: Đoạn văn chủ yếu nói về điều gì?", opts: "A. Các loại màu chính, phụ - B. Cách pha màu - C. Màu sắc và tâm lý - D. Vài thông tin cơ bản về màu sắc", whyCorrect: "Đoạn văn đề cập đến tâm trạng (mood), phân loại màu, pha màu (mixing), và màu trung tính (neutral). Đáp án D mang tính bao quát toàn bộ bài.", whyIncorrect: "A, B, C chỉ là các ý chi tiết nhỏ lẻ xuất hiện trong bài." } },
+    { id: 25, cat: "read_short", type: "mcq", q: "25. Which of the following is the correct way to make red orange from the three primary colours?", opts: ["A. Mix red and yellow, then mix the new colour with red.", "B. Mix yellow and blue, then mix the new colour with red.", "C. Mix red and blue, then mix the new colour with yellow.", "D. Mix the three primary colours."], correct: 0,
+      exp: { trans: "Dịch: Cách đúng để tạo ra màu đỏ cam (red orange) từ 3 màu cơ bản?", opts: "A. Trộn đỏ+vàng, lấy màu mới trộn tiếp với đỏ - B. Trộn vàng+xanh, lấy màu mới trộn với đỏ...", whyCorrect: "Đoạn văn viết: 'Orange is made by mixing yellow and red' (Cam = Vàng + Đỏ). Tiếp theo 'intermediate colours can be made by mixing primary and secondary'. Vậy Đỏ Cam = Đỏ + Cam. Tức là ta trộn Đỏ và Vàng ra Cam, rồi lấy Cam trộn với Đỏ.", whyIncorrect: "Các đáp án B, C sai công thức pha màu. D (trộn 3 màu) ra màu nâu/đen." } },
+    { id: 26, cat: "read_short", type: "mcq", q: "26. According to the passage, white is a _______.", opts: ["A. special colour", "B. neutral colour", "C. Both A and B", "D. None of above"], correct: 2,
+      exp: { trans: "Dịch: Theo đoạn văn, màu trắng là màu _______.", opts: "A. đặc biệt - B. trung tính - C. Cả A và B - D. Không đáp án nào", whyCorrect: "Trích dẫn nguyên văn: 'Black, white, and gray are special colours. They are called neutral colours.' -> Trắng vừa là special, vừa là neutral.", whyIncorrect: "Nếu chỉ chọn A hoặc chỉ chọn B thì sẽ bị thiếu thông tin." } },
+    { id: 27, cat: "read_short", type: "mcq", q: "27. Which of the following can't be found in the colour wheel?", opts: ["A. Red orange", "B. Green", "C. Yellow", "D. Black"], correct: 3,
+      exp: { trans: "Dịch: Màu nào sau đây KHÔNG có mặt trong bánh xe màu sắc (colour wheel)?", opts: "A. Đỏ cam - B. Xanh lá - C. Vàng - D. Đen", whyCorrect: "Black, white, gray được gọi là màu trung tính (neutral colours). Trong hội họa, bánh xe màu sắc (colour wheel) chỉ chứa các màu có sắc độ (Hue) từ Primary, Secondary, Intermediate.", whyIncorrect: "A, B, C đều thuộc các nhóm màu cơ bản, thứ cấp hoặc trung gian trên bánh xe." } },
+    { id: 28, cat: "read_short", type: "mcq", q: "28. We can learn from the passage that ___________.", opts: ["A. happy and energetic people like bright colours", "B. the colour wheel has 12 colours", "C. we can also mix different colours to make the primary colours", "D. artists are the best ones to know and use colour"], correct: 1, // CORRECTED TO 'B' BASED ON THE REVISION IN PROMPT
+      exp: { trans: "Dịch: Chúng ta rút ra được điều gì từ đoạn văn?", opts: "A. Người vui vẻ thích màu sáng - B. Vòng quay màu có 12 màu - C. Có thể trộn màu ra màu cơ bản - D. Họa sĩ dùng màu giỏi nhất", whyCorrect: "Có thể suy luận toán học từ bài đọc: 3 primary colours (đỏ, vàng, xanh lam) + 3 secondary colours (cam, xanh lá, tím) + 6 intermediate colours (sự kết hợp của 3 primary và 3 secondary) = 12 màu cơ bản trên vòng quay màu sắc (colour wheel).", whyIncorrect: "A bị ngược logic (Màu sáng LÀM con người vui vẻ, không phải người vui thích màu sáng). C sai kiến thức vì màu cơ bản không thể pha. D không được nhắc đến." } },
+
+    // PART V: Read Long (29-38)
+    { id: 29, cat: "read_long", type: "mcq", q: "29. It is considered that Vietnamese cuisine __________.", opts: ["A. originated from the North", "B. became more and more popular", "C. always combines taste and colour", "D. can be found only in Northern Vietnam"], correct: 0,
+      exp: { trans: "Dịch: Ẩm thực Việt Nam được xem là __________.", opts: "A. bắt nguồn từ miền Bắc - B. ngày càng phổ biến - C. luôn kết hợp mùi vị và màu sắc - D. chỉ có ở miền Bắc", whyCorrect: "Trích dẫn đoạn 1: 'Northern Vietnam is seen to be the cradle of Vietnamese cuisine'. Từ 'cradle' nghĩa là cái nôi/nguồn gốc -> Bắt nguồn từ miền Bắc.", whyIncorrect: "B và C không có dữ kiện. D sai vì ẩm thực Việt Nam có ở cả 3 miền." } },
+    { id: 30, cat: "read_long", type: "mcq", q: "30. What are the features of Northern Vietnamese food?", opts: ["A. It’s delicious and healthy.", "B. It’s sweet and sour.", "C. It’s light and balanced.", "D. It’s a bit fatty and salty."], correct: 2,
+      exp: { trans: "Dịch: Đặc điểm của đồ ăn miền Bắc là gì?", opts: "A. Ngon và bổ - B. Chua ngọt - C. Thanh đạm và cân bằng - D. Béo và mặn", whyCorrect: "Trích dẫn trực tiếp đoạn 1: 'In Northern Vietnam, food is characterized by light and balanced.'", whyIncorrect: "Các đặc điểm khác không xuất hiện trong bài hoặc bị gán nhầm vùng miền." } },
+    { id: 31, cat: "read_long", type: "mcq", q: "31. Hue cuisine is notable for its __________.", opts: ["A. colorful food", "B. spicy taste", "C. bitter taste", "D. light flavor"], correct: 1,
+      exp: { trans: "Dịch: Ẩm thực Huế nổi bật bởi __________.", opts: "A. Thức ăn nhiều màu - B. Vị cay - C. Vị đắng - D. Vị thanh đạm", whyCorrect: "Trích dẫn: 'The regional cuisine of Central Vietnam is famous for its spicy food. Hue cuisine is typical...' -> Đồ Huế đặc trưng cho miền Trung: Vị cay (spicy).", whyIncorrect: "Vị thanh đạm (light flavor) là đặc trưng của miền Bắc." } },
+    { id: 32, cat: "read_long", type: "mcq", q: "32. In Southern Vietnam, __________.", opts: ["A. the warm weather makes it hard to plant fruit and vegetables", "B. fresh herbs are always used in cooking", "C. people love sweet food", "D. sugar is often added to dishes"], correct: 3,
+      exp: { trans: "Dịch: Ở miền Nam Việt Nam, __________.", opts: "A. Thời tiết khó trồng cây - B. Luôn dùng rau thơm - C. Yêu đồ ngọt - D. Đường thường được thêm vào đĩa ăn", whyCorrect: "Trích dẫn nguyên văn đoạn 1: 'they add sugar in almost dishes' -> Đường thường được thêm vào món ăn.", whyIncorrect: "A sai từ 'hard', thực tế là 'ideal condition' (lý tưởng). D chính xác và sát văn bản hơn C." } },
+    { id: 33, cat: "read_long", type: "mcq", q: "33. Which of the followings is NOT true?", opts: ["A. Food in Vietnam changes region to region.", "B. Southerners do not like northern food due to its light flavor.", "C. Chili peppers and shrimp sauces are frequently used ingredients.", "D. Bun Bo Hue is a typical dish of the Central Vietnam cuisine."], correct: 1,
+      exp: { trans: "Dịch: Điều nào sau đây KHÔNG đúng (NOT true)?", opts: "A. Đồ ăn thay đổi theo vùng - B. Người miền Nam không thích đồ miền Bắc vì vị nhạt - C. Ớt và mắm tôm thường được dùng - D. Bún bò Huế là món ăn điển hình miền Trung", whyCorrect: "Thông tin 'Người miền Nam không thích đồ miền Bắc' KHÔNG HỀ có trong đoạn văn. Đây là suy diễn sai lệch.", whyIncorrect: "A, C, D đều là các thông tin có thật được trích dẫn trực tiếp trong bài đọc." } },
+    { id: 34, cat: "read_long", type: "mcq", q: "34. You can ________ by watching water puppet shows.", opts: ["A. escape from your busy life", "B. refresh your minds", "C. be good at swimming", "D. Both A & B are correct."], correct: 3,
+      exp: { trans: "Dịch: Bạn có thể ________ bằng cách xem múa rối nước.", opts: "A. thoát khỏi cuộc sống bận rộn - B. làm mới tâm trí - C. bơi giỏi - D. Cả A và B đều đúng", whyCorrect: "Trích dẫn đoạn 2: 'Watching this show can help you escape from your busy life and refresh your minds...' -> Cả A và B đều đúng.", whyIncorrect: "Múa rối nước không giúp bạn học bơi." } },
+    { id: 35, cat: "read_long", type: "mcq", q: "35. There are about ________ in the orchestra.", opts: ["A. 4 musical instruments", "B. 7 people", "C. 9 strings", "D. None are correct."], correct: 1,
+      exp: { trans: "Dịch: Có khoảng ________ trong dàn nhạc.", opts: "A. 4 nhạc cụ - B. 7 người - C. 9 sợi dây đàn - D. Không có đáp án đúng", whyCorrect: "Trích dẫn đoạn 2: '...a small folk orchestra of about 7 people' (dàn nhạc dân gian khoảng 7 người).", whyIncorrect: "Con số 4 và 9 là mồi nhử không xuất hiện trong bài." } },
+    { id: 36, cat: "read_long", type: "mcq", q: "36. 'They' in paragraph 2 refers to ________.", opts: ["A. The themes of the shows", "B. Vietnamese people", "C. the puppeteers", "D. water puppetry (All puppets)"], correct: 3,
+      exp: { trans: "Dịch: Từ 'They' trong đoạn 2 ám chỉ ________.", opts: "A. Chủ đề show diễn - B. Người Việt - C. Người múa rối - D. Những con rối", whyCorrect: "Câu trước: 'All puppets are made of fig wood...' Câu sau: 'Then they are carved and painted.' -> 'They' (chúng được chạm khắc và sơn màu) chính là thay thế cho 'All puppets'.", whyIncorrect: "Chủ đề, Người Việt hay Người múa rối đều không bị mang ra để chạm khắc và sơn màu." } },
+    { id: 37, cat: "read_long", type: "mcq", q: "37. ________ is the material to make all puppets.", opts: ["A. Fig wood", "B. Stones", "C. Water", "D. None are correct."], correct: 0,
+      exp: { trans: "Dịch: ________ là vật liệu để làm ra tất cả các con rối.", opts: "A. Gỗ sung - B. Đá - C. Nước - D. Không đáp án nào", whyCorrect: "Trích dẫn rõ ràng: 'All puppets are made of fig wood...' (Tất cả con rối được làm bằng gỗ sung).", whyIncorrect: "Đá (nặng sẽ chìm), Nước (không đẽo gọt được) đều sai thực tế bài đọc." } },
+    { id: 38, cat: "read_long", type: "mcq", q: "38. According to the text, which theatre is the most popular for water puppetry?", opts: ["A. Thang Long Water Puppet Theatre", "B. Hoan Kiem Lake", "C. Dinh Tien Hoang Street", "D. None of the above"], correct: 0,
+      exp: { trans: "Dịch: Theo bài đọc, nhà hát nào nổi tiếng nhất về múa rối nước?", opts: "A. Nhà hát múa rối nước Thăng Long - B. Hồ Hoàn Kiếm - C. Phố Đinh Tiên Hoàng - D. Không đáp án nào", whyCorrect: "Trích dẫn câu cuối: 'Thang Long Water Puppet Theatre... is the most popular theatre for water puppetry.'", whyIncorrect: "Hồ Hoàn Kiếm và Phố Đinh Tiên Hoàng chỉ là vị trí địa lý của nhà hát, không phải tên nhà hát." } },
+
+    // PART VI: Writing (39-50) => Replaced 2 old writing with 2 new Dialogue questions
+    { id: 39, cat: "writing", type: "input", matchType: "exact", q: "39. Classical music is interesting. Folk music is interesting. (Viết lại dùng as…as)", correct: ["classical music is as interesting as folk music", "folk music is as interesting as classical music"],
+      exp: { trans: "Viết lại câu dùng cấu trúc so sánh bằng (as ... as).", opts: "", whyCorrect: "Cấu trúc chuẩn: S1 + to be + as + Adj + as + S2. VD: Folk music is as interesting as classical music.", whyIncorrect: "Quên chữ 'as' đầu tiên hoặc thứ hai, hoặc đảo vị trí tính từ đều bị tính sai." } },
+    { id: 40, cat: "writing", type: "input", matchType: "exact", q: "40. This picture is 800,000 VND. That picture is 600,000 VND. (Viết lại dùng price… different)", correct: ["the price of this picture is different from that picture", "the price of this picture is different from the price of that picture", "the price of that picture is different from this picture", "the price of that picture is different from the price of this picture"],
+      exp: { trans: "Bức tranh này 800k. Bức kia 600k -> Giá của chúng khác nhau.", opts: "", whyCorrect: "Dùng 'price' và 'different'. Cấu trúc: The price of A is different from the price of B.", whyIncorrect: "Dùng 'different with' (sai giới từ) hoặc không có chữ 'price'." } },
+    { id: 41, cat: "writing", type: "input", matchType: "exact", q: "41. My hair is short. Your hair is long. (Viết lại dùng isn't as...as)", correct: ["my hair isnt as long as your hair", "my hair is not as long as your hair", "your hair isnt as short as my hair", "your hair is not as short as my hair"],
+      exp: { trans: "Tóc tôi ngắn. Tóc bạn dài. -> Viết lại dùng 'không bằng'.", opts: "", whyCorrect: "Tóc tôi ngắn = Tóc tôi không dài bằng tóc bạn (My hair isn't as long as your hair).", whyIncorrect: "Viết ngược logic (Tóc bạn không dài bằng tóc tôi) là sai bét." } },
+    { id: 42, cat: "writing", type: "input", matchType: "exact", q: "42. There is no bread left at the bakery. (Viết lại bắt đầu bằng There isn't...)", correct: ["there isnt any bread left at the bakery", "there is not any bread left at the bakery"],
+      exp: { trans: "Viết lại câu phủ định sử dụng 'any'.", opts: "", whyCorrect: "Cấu trúc chuyển đổi: There is no + Noun = There isn't ANY + Noun. -> There isn't any bread left at the bakery.", whyIncorrect: "Rất nhiều bạn quên mất chữ 'any' hoặc chữ 'left' (còn lại)." } },
+    { id: 43, cat: "writing", type: "input", matchType: "exact", q: "43. I think that cooking an omelette is not difficult. (Viết lại bắt đầu bằng I find...)", correct: ["i find cooking an omelette not difficult", "i find it not difficult to cook an omelette", "i find cooking an omelette easy", "i find it easy to cook an omelette"],
+      exp: { trans: "Tôi nghĩ chiên trứng không khó -> Tôi thấy việc chiên trứng không khó.", opts: "", whyCorrect: "Cấu trúc I find + V-ing/N + Adj (hoặc: I find it + Adj + to V). -> I find cooking an omelette not difficult.", whyIncorrect: "Thêm chữ 'is' vào giữa (I find cooking is not difficult) là sai cấu trúc ngữ pháp." } },
+    { id: 44, cat: "writing", type: "input", matchType: "exact", q: "44. No other noodle soup in our town is as popular as Pho bo. (Viết lại bắt đầu bằng Pho bo is the...)", correct: ["pho bo is the most popular noodle soup in our town"],
+      exp: { trans: "Chuyển từ So sánh bằng (phủ định) sang So sánh nhất.", opts: "", whyCorrect: "Không món mì nào phổ biến bằng Phở bò = Phở bò là món phổ biến nhất. Tính từ dài 'popular' thêm 'the most'.", whyIncorrect: "Thiếu 'in our town' (ngữ cảnh) sẽ bị mất điểm." } },
+    { id: 45, cat: "writing", type: "input", matchType: "exact", q: "45. Your album is not the same as my album. (Viết lại dùng từ different)", correct: ["your album is different from my album", "my album is different from your album"],
+      exp: { trans: "Cuốn album của bạn không giống của tôi -> khác của tôi.", opts: "", whyCorrect: "Cấu trúc 'not the same as' = 'different from'. -> Your album is different from my album.", whyIncorrect: "Quên mất giới từ 'from' là lỗi rất hay mắc phải." } },
+    { id: 46, cat: "writing", type: "input", matchType: "exact", q: "46. What is the price of a kilo of this pork? (Viết lại bắt đầu bằng How much...)", correct: ["how much is a kilo of this pork", "how much does a kilo of this pork cost"],
+      exp: { trans: "Viết lại câu hỏi giá tiền.", opts: "", whyCorrect: "What is the price of... = How much is... = How much does... cost? -> How much is a kilo of this pork?", whyIncorrect: "Hỏi lẫn lộn cấu trúc (VD: How much is the price...) là sai hoàn toàn." } },
+    { id: 47, cat: "writing", type: "input", matchType: "exact", q: "47. my / is / from / yours / taste / different / in / art / . (Sắp xếp từ)", correct: ["my taste in art is different from yours"],
+      exp: { trans: "Sắp xếp từ thành câu hoàn chỉnh.", opts: "", whyCorrect: "Chủ ngữ 'My taste in art' (Gu nghệ thuật của tôi) + is different from + yours (của bạn).", whyIncorrect: "Sắp xếp sai trật tự danh từ hoặc giới từ." } },
+    { id: 48, cat: "writing", type: "input", matchType: "exact", q: "48. water / should / drink / day / much / how / we / every / ? (Sắp xếp từ)", correct: ["how much water should we drink every day"],
+      exp: { trans: "Sắp xếp từ thành câu hỏi.", opts: "", whyCorrect: "Cấu trúc: How much + danh từ không đếm được (water) + trợ động từ (should) + S + V + trạng từ thời gian (every day)?", whyIncorrect: "Đặt 'every day' lên đầu câu hỏi nghi vấn là sai cấu trúc." } },
+    
+    // 2 New Dialogue Questions
+    { id: 49, cat: "writing", type: "mcq", q: `49. Put the sentences in order to make a dialogue:<br>
+        a. Once a week. I have piano lessons on Saturdays.<br>
+        b. How often do you have music lessons?<br>
+        c. That sounds fun! Do you enjoy them?<br>
+        d. Yes, I do. Playing the piano makes me relaxed.`, opts: ["A. b - a - c - d", "B. a - b - c - d", "C. b - c - a - d", "D. b - a - d - c"], correct: 0,
+      exp: { trans: "Dịch: Sắp xếp các câu để tạo thành đoạn hội thoại.", opts: "A. b-a-c-d - B. a-b-c-d - C. b-c-a-d - D. b-a-d-c", whyCorrect: "Câu b (hỏi tần suất học nhạc) đứng đầu, câu a (trả lời tần suất - mỗi tuần 1 lần) nối tiếp. Sau đó câu c khen ngợi và hỏi (bạn có thích không?), cuối cùng câu d trả lời (Có, tôi thích). -> b-a-c-d.", whyIncorrect: "Các đáp án khác không tạo ra mạch logic hỏi - đáp tự nhiên." } },
+    { id: 50, cat: "writing", type: "mcq", q: `50. Put the sentences in order to make a dialogue:<br>
+        a. I love visiting art galleries. I usually go with my sister.<br>
+        b. Do you like art?<br>
+        c. That's interesting. What do you often do there?<br>
+        d. I look at the paintings and sometimes buy postcards.`, opts: ["A. b - c - a - d", "B. b - a - c - d", "C. a - b - c - d", "D. b - a - d - c"], correct: 1,
+      exp: { trans: "Dịch: Sắp xếp các câu để tạo thành đoạn hội thoại.", opts: "A. b-c-a-d - B. b-a-c-d - C. a-b-c-d - D. b-a-d-c", whyCorrect: "Câu b (hỏi có thích nghệ thuật không) mở đầu. Câu a (trả lời thích đi phòng tranh) đáp lại. Câu c (hỏi thường làm gì ở đó) nối tiếp mạch chuyện. Câu d (trả lời ngắm tranh và mua thiệp) chốt lại. -> b-a-c-d.", whyIncorrect: "Câu c ('ở đó' - there) bắt buộc phải đứng sau câu a (vì câu a mới nhắc đến 'art galleries'). Bất kỳ trật tự nào khác đều vô nghĩa." } }
+];
+
+let isTestSubmitted = false;
+let timerInterval;
+let timeLeft = 3600; // 60 mins
+let totalScore = 0;
+let userAnswers = {}; 
+
+let catScores = {
+    phonetics: { score: 0, max: 5, name: "I. Ngữ âm & Trọng âm" },
+    vocab_gram: { score: 0, max: 13, name: "II. Từ vựng & Giao tiếp" },
+    cloze: { score: 0, max: 5, name: "III. Điền từ (Cloze Test)" },
+    read_short: { score: 0, max: 5, name: "IV. Đọc hiểu Mạch văn" },
+    read_long: { score: 0, max: 10, name: "V. Đọc hiểu Đoạn văn dài" },
+    writing: { score: 0, max: 12, name: "VI. Kỹ năng Viết & Hội thoại" }
+};
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playTone(type) {
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    if(type === 'ding') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
+        gainNode.gain.setValueAtTime(0.4, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+    } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+        gainNode.gain.setValueAtTime(0.4, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+    }
+    osc.connect(gainNode); gainNode.connect(audioCtx.destination);
+    osc.start(); osc.stop(audioCtx.currentTime + 0.5);
+}
+
+let isHighlighting = false;
+function toggleHighlight() {
+    isHighlighting = !isHighlighting;
+    const btn = document.getElementById('highlight-btn');
+    if(isHighlighting) {
+        btn.style.background = 'var(--theme-accent)'; btn.style.color = '#fff';
+        document.addEventListener('mouseup', applyHighlight);
+    } else {
+        btn.style.background = '#ffffff'; btn.style.color = 'var(--theme-primary)';
+        document.removeEventListener('mouseup', applyHighlight);
+    }
+}
+function applyHighlight() {
+    const selection = window.getSelection();
+    if (!selection.isCollapsed) {
+        const range = selection.getRangeAt(0);
+        const span = document.createElement('span');
+        span.className = 'highlighted';
+        try { range.surroundContents(span); } catch(e) {}
+        selection.removeAllRanges();
+    }
+}
+
+function startTest() {
+    const name = document.getElementById('student-name').value.trim();
+    if (!name) { alert("Bảo bối Thẻ Tên chưa kích hoạt kìa! Nhập tên vào sổ điểm đã con ơi!"); return; }
+    
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('quiz-screen').style.display = 'block';
+    document.getElementById('display-name').innerText = name;
+    
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    renderQuestions();
+    
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        let m = Math.floor(timeLeft / 60); let s = timeLeft % 60;
+        let timerEl = document.getElementById('timer');
+        timerEl.innerText = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
+        
+        if (timeLeft <= 300) timerEl.classList.add('timer-warning'); // 5 minutes
+        if (timeLeft <= 0) { 
+            clearInterval(timerInterval); 
+            alert("Hết giờ làm bài! Cỗ máy thời gian tự động khóa bài thi.");
+            forceSubmitTest(); 
+        }
+    }, 1000);
+}
+
+function buildQuestionHTML(q) {
+    let qHTML = `<div class="question-block" id="block-${q.id}">`;
+    qHTML += `<div class="question-text">${q.q}</div>`;
+
+    if (q.type === 'mcq') {
+        qHTML += `<div class="options-grid">`;
+        q.opts.forEach((opt, i) => {
+            qHTML += `<div class="option" id="opt-${q.id}-${i}" onclick="selectOption('${q.id}', ${i})">${opt}</div>`;
+        });
+        qHTML += `</div>`;
+        qHTML += `<button class="check-btn" id="btn-${q.id}" onclick="checkMCQImmediate('${q.id}')">Check 🔍</button>`;
+    } else if (q.type === 'input') {
+        qHTML += `<input type="text" class="input-gap" id="input-${q.id}" placeholder="Viết câu trả lời vào đây..." autocomplete="off">`;
+        qHTML += `<br><button class="check-btn" id="btn-${q.id}" onclick="checkInputImmediate('${q.id}')">Check 🔍</button>`;
+    }
+
+    qHTML += `<div class="explanation" id="exp-${q.id}">
+        <p><b>📖 Phân tích:</b> ${q.exp.trans}</p>
+        ${q.exp.opts ? `<p style="margin-top:5px;"><b>💡 Dịch đáp án:</b> ${q.exp.opts}</p>` : ''}
+        <p style="color:var(--correct); margin-top:8px;"><b>✅ Vì sao đúng:</b> ${q.exp.whyCorrect}</p>
+        <p style="color:var(--incorrect); margin-top:8px;"><b>❌ Tránh bẫy:</b> ${q.exp.whyIncorrect}</p>
+    </div></div>`;
+    return qHTML;
+}
+
+function renderQuestions() {
+    const p1 = document.getElementById('part1-container');
+    const p2 = document.getElementById('part2-container');
+    const p3 = document.getElementById('part3-container');
+    const p4 = document.getElementById('part4-container');
+    const p5 = document.getElementById('part5-container');
+    const p6 = document.getElementById('part6-container');
+    
+    quizData.forEach((q) => {
+        let html = buildQuestionHTML(q);
+        if (q.id <= 5) p1.innerHTML += html;
+        else if (q.id <= 18) p2.innerHTML += html;
+        else if (q.id <= 23) p3.innerHTML += html;
+        else if (q.id <= 28) p4.innerHTML += html;
+        else if (q.id <= 38) p5.innerHTML += html;
+        else p6.innerHTML += html;
+    });
+}
+
+function selectOption(qId, optIndex) {
+    if (isTestSubmitted) return;
+    const btn = document.getElementById(`btn-${qId}`);
+    if (btn && btn.classList.contains('disabled')) return; // Already checked
+
+    document.querySelectorAll(`[id^="opt-${qId}-"]`).forEach(el => el.classList.remove('selected-opt'));
+    const selectedEl = document.getElementById(`opt-${qId}-${optIndex}`);
+    selectedEl.classList.add('selected-opt');
+    userAnswers[qId] = optIndex;
+}
+
+function checkMCQImmediate(qId) {
+    if (isTestSubmitted) return;
+    const q = quizData.find(item => item.id == qId);
+    
+    if (userAnswers[qId] === undefined) { alert("Con nhớ tích chọn một đáp án trước khi nhấn Check nhé! 🔔"); return; }
+
+    const selectedOpt = userAnswers[qId];
+    const selectedEl = document.getElementById(`opt-${qId}-${selectedOpt}`);
+    selectedEl.classList.remove('selected-opt');
+
+    if (selectedOpt === q.correct) {
+        selectedEl.classList.add('correct');
+        totalScore += 1;
+        catScores[q.cat].score += 1;
+        playTone('ding');
+    } else {
+        selectedEl.classList.add('incorrect');
+        const correctEl = document.getElementById(`opt-${qId}-${q.correct}`);
+        if (correctEl) correctEl.classList.add('correct');
+        playTone('buzzer');
+        selectedEl.animate([{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(0)'}], {duration: 400});
+    }
+
+    document.querySelectorAll(`[id^="opt-${qId}-"]`).forEach(el => { el.classList.add('disabled'); el.onclick = null; });
+    const btn = document.getElementById(`btn-${qId}`);
+    if (btn) { btn.classList.add('disabled'); btn.onclick = null; }
+    document.getElementById(`exp-${qId}`).style.display = 'block';
+}
+
+function checkInputImmediate(qId) {
+    if (isTestSubmitted) return;
+    const q = quizData.find(item => item.id == qId);
+    let el = document.getElementById(`input-${qId}`);
+    let val = el.value.trim().toLowerCase();
+    
+    if (val === "") { alert("Cô chưa thấy con gõ đáp án kìa! 🔔"); return; }
+
+    let cleanVal = val.replace(/[.,!?]/g, "").trim();
+    let isCurrentCorrect = q.correct.some(c => cleanVal === c || cleanVal.includes(c));
+
+    if (isCurrentCorrect) {
+        el.style.borderColor = 'var(--correct)'; el.style.backgroundColor = '#eafaf1'; el.style.color = 'var(--correct)';
+        totalScore += 1;
+        catScores[q.cat].score += 1;
+        playTone('ding');
+    } else {
+        el.style.borderColor = 'var(--incorrect)'; el.style.backgroundColor = '#fdedec'; el.style.color = 'var(--incorrect)';
+        playTone('buzzer');
+    }
+
+    el.disabled = true;
+    let btn = document.getElementById(`btn-${qId}`);
+    if (btn) { btn.classList.add('disabled'); btn.onclick = null; }
+    document.getElementById(`exp-${qId}`).style.display = 'block';
+}
+
+function submitTest() {
+    if (isTestSubmitted) return;
+    if (!confirm("Con đã chắc chắn muốn nộp bài chưa? (Hệ thống sẽ tự động check nốt những câu con chưa chấm đó!)")) return;
+    forceSubmitTest();
+}
+
+function forceSubmitTest() {
+    clearInterval(timerInterval);
+    isTestSubmitted = true;
+    document.getElementById('submit-btn').style.display = 'none';
+
+    quizData.forEach(q => {
+        const btn = document.getElementById(`btn-${q.id}`);
+        if (btn && !btn.classList.contains('disabled')) { // Not checked yet
+            if (q.type === 'mcq') {
+                if (userAnswers[q.id] !== undefined) {
+                    const selectedOpt = userAnswers[q.id];
+                    const selectedEl = document.getElementById(`opt-${q.id}-${selectedOpt}`);
+                    selectedEl.classList.remove('selected-opt');
+                    if (selectedOpt === q.correct) { 
+                        totalScore += 1; 
+                        catScores[q.cat].score += 1;
+                        selectedEl.classList.add('correct'); 
+                    } else {
+                        selectedEl.classList.add('incorrect');
+                        const correctEl = document.getElementById(`opt-${q.id}-${q.correct}`);
+                        if (correctEl) correctEl.classList.add('correct');
+                    }
+                } else {
+                     const correctEl = document.getElementById(`opt-${q.id}-${q.correct}`);
+                     if (correctEl) correctEl.classList.add('correct');
+                }
+                document.querySelectorAll(`[id^="opt-${q.id}-"]`).forEach(el => { el.classList.add('disabled'); el.onclick = null; });
+            } else if (q.type === 'input') {
+                let el = document.getElementById(`input-${q.id}`);
+                if (!el.disabled) {
+                    let val = el.value.trim().toLowerCase();
+                    let cleanVal = val.replace(/[.,!?]/g, "").trim();
+                    let isCurrentCorrect = false;
+                    if(val !== "") {
+                        isCurrentCorrect = q.correct.some(c => cleanVal === c || cleanVal.includes(c));
+                    }
+                    if (isCurrentCorrect) {
+                        totalScore += 1; 
+                        catScores[q.cat].score += 1;
+                        el.style.borderColor = 'var(--correct)'; el.style.backgroundColor = '#eafaf1'; el.style.color = 'var(--correct)';
+                    } else {
+                        el.style.borderColor = 'var(--incorrect)'; el.style.backgroundColor = '#fdedec';
+                    }
+                    el.disabled = true;
+                }
+            }
+            if(btn) { btn.classList.add('disabled'); btn.onclick = null; }
+            document.getElementById(`exp-${q.id}`).style.display = 'block';
+        }
+    });
+
+    if (totalScore >= 25) { playTone('ding'); fireConfetti(); } else { playTone('buzzer'); }
+    
+    generateMatrixReport();
+    document.getElementById('report-screen').style.display = 'block';
+    document.getElementById('final-name').innerText = "Học sinh: " + document.getElementById('student-name').value;
+    document.getElementById('final-score-10').innerText = `${totalScore} / 50`;
+    
+    setTimeout(() => { document.getElementById('report-screen').scrollIntoView({ behavior: 'smooth' }); }, 800);
+}
+
+function generateMatrixReport() {
+    let tbody = document.getElementById('matrix-body');
+    let minPercent = 100;
+    let weakestSkill = "";
+
+    for (const key in catScores) {
+        let cat = catScores[key];
+        let percent = Math.round((cat.score / cat.max) * 100);
+        let badgeClass = "weakness";
+        let rank = "Cần cố gắng (Weakness)";
+        
+        if (percent >= 80) { badgeClass = "mastered"; rank = "Tốt (Mastered)"; }
+        else if (percent >= 50) { badgeClass = "practice"; rank = "Khá (Needs Practice)"; }
+
+        if (percent < minPercent) {
+            minPercent = percent;
+            weakestSkill = key;
+        }
+
+        tbody.innerHTML += `
+            <tr>
+                <td style="text-align: left;">${cat.name}</td>
+                <td>${cat.score} / ${cat.max}</td>
+                <td>${percent}%</td>
+                <td><span class="badge ${badgeClass}">${rank}</span></td>
+            </tr>
+        `;
+    }
+
+    // Teacher's Doraemon Comment
+    let commentBox = document.getElementById('teacher-comment');
+    let msg = "";
+    if (totalScore >= 40) {
+        msg = `<h3>Xuất sắc quá! 🎨🏆</h3>Cô Mai Thùy chấm bài mà mát lòng mát dạ luôn! Điểm của con siêu cao, chứng tỏ kiến thức nền rất vững. Nhớ duy trì ngọn lửa này nhé, tặng con <b>'Bánh Rán Của Doraemon'</b> để nạp năng lượng học tiếp nghen!`;
+    } else {
+        if (weakestSkill === 'phonetics') {
+            msg = `<h3>Phần Ngữ âm đang hơi "níu chân" con đó nha! 🎙️</h3>Cô Mai Thùy nhận thấy con hay bị lúng túng khi xác định âm /s/, /z/, /ʃ/ và quy tắc đánh trọng âm. Cô cho con mượn <b>'Micro Thay Đổi Giọng Nói'</b> của Doraemon nha! Nhớ lấy ra luyện đọc to từ vựng mỗi ngày, đừng chỉ học bằng mắt nhé!`;
+        } else if (weakestSkill === 'vocab_gram') {
+            msg = `<h3>Chà chà, Từ vựng & Giao tiếp đang báo động đỏ nè! 🚨</h3>Phần xử lý tình huống giao tiếp và từ vựng của con đang hơi "não cá vàng" một xíu. Nhận ngay <b>'Bánh Mì Ghi Nhớ'</b> từ cô Thùy nha! Ép 5 từ vựng hoặc câu giao tiếp thực tế vào bánh mì ăn mỗi sáng là nhớ dai lắm đó!`;
+        } else if (weakestSkill === 'cloze' || weakestSkill === 'read_short' || weakestSkill === 'read_long') {
+            msg = `<h3>Đọc hiểu dài làm con hoa mắt đúng không? 🧐</h3>Nhìn bài đọc dài thòng lọng là muốn buông xuôi đúng không nào? Nhận ngay <b>'Kính Lúp Xuyên Thấu'</b> từ túi thần kỳ của cô Mai Thùy nhé! Mẹo nhỏ: Luôn đọc câu hỏi trước, lấy "kính lúp" soi tìm Keywords (từ khóa) rồi mới gióng lên đoạn văn tìm đáp án nha. Đừng dịch từng chữ!`;
+        } else {
+            msg = `<h3>Kỹ năng Viết (Sắp xếp / Viết lại câu) cần chú ý hơn! ✍️</h3>Để viết được câu Tiếng Anh chuẩn, con phải cực kỳ cẩn thận với ngữ pháp và trật tự logic (đặc biệt là bài hội thoại). Cô tặng con <b>'Bút Chì Máy Tính'</b> nha. Cứ chăm chỉ làm bài tập tự luận theo cấu trúc mẫu, level sẽ tự động nhảy số lên Max!`;
+        }
+    }
+    commentBox.innerHTML = msg;
+}
+
+function fireConfetti() {
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const pieces = [];
+    for(let i=0; i<250; i++) {
+        pieces.push({
+            x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height,
+            size: Math.random() * 12 + 6, color: ['#1e3799', '#4a69bd', '#f6b93b', '#ffffff', '#27ae60'][Math.floor(Math.random() * 5)],
+            vy: Math.random() * 3 + 3, vx: Math.random() * 2 - 1
+        });
+    }
+    function update() {
+        ctx.clearRect(0,0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+            p.y += p.vy; p.x += p.vx;
+            ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.size/2, 0, Math.PI*2); ctx.fill();
+        });
+        if(pieces.some(p => p.y < canvas.height)) requestAnimationFrame(update);
+    }
+    update();
+}
+</script>
+</body>
+</html>
